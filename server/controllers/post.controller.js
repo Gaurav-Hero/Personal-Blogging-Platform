@@ -43,10 +43,11 @@ export const getPostById = async(req,res) => {
 
 export const updatePost = async (req, res) => {
     try {
-      const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, {
-        new: true, // Return updated document
-        runValidators: true, // Ensure validation rules are applied
-      });
+      const updatedPost = await Post.findByIdAndUpdate(
+        req.params.id,
+        { $set: req.body }, // Updates only the provided fields
+        { new: true }
+      );
   
       if (!updatedPost) return res.status(404).json({ message: "Post not found" });
   

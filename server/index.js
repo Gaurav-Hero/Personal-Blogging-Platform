@@ -9,12 +9,12 @@ connectionDB();
 
 const app = express()
 
-app.use(express.json()); // Middleware for JSON parsing
-app.use(cors()); // Enable CORS
+app.use(express.json()); 
+app.use(cors());
 
-// API Routes
 app.use("/api/posts", postRouter);
 
-app.listen(3000,() => {
-    console.log("Your seerver is damchaak!")
+const port = process.env.PORT || 3000
+app.listen(port,() => {
+    console.log(`Your seerver is damchaak! @http://localhost:${port}/api/posts`);
 })
