@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const SinglePost = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [post, setPost] = useState(null);
 
   useEffect(() => {
@@ -17,6 +18,18 @@ const SinglePost = () => {
     };
     fetchPost();
   }, [id]);
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this post?");
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:5000/api/posts/${id}`);
+        navigate("/"); 
+      } catch (error) {
+        console.error("Error deleting post:", error);
+      }
+    }
+  };
 
   if (!post) return <p className="text-center text-lg">Loading...</p>;
 
@@ -34,15 +47,24 @@ const SinglePost = () => {
       </div>
       <p className="mt-4">{post.content}</p>
 
-      {/* Edit button */}
-      <Link
-        to={`/edit/${post._id}`}
-        className="mt-4 inline-block bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600"
-      >
-        Edit Post
-      </Link>
+      
+      <div className="mt-4 flex space-x-4">
+        <Link
+          to={`/edit/${post._id}`}
+          className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+        >
+          Edit
+        </Link>
+        <button
+          onClick={handleDelete}
+          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
 
 export default SinglePost;
+

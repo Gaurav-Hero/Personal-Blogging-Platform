@@ -17,7 +17,7 @@ const EditPost = () => {
       try {
         const res = await axios.get(`http://localhost:5000/api/posts/${id}`);
         setTitle(res.data.title);
-        setContent(res.data.content);
+        setContent(res.data.content);  
         setAuthor(res.data.author);
         setTags(res.data.tags.join(", "));
       } catch (error) {
