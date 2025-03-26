@@ -12,7 +12,7 @@ const EditPost = () => {
   const [tags, setTags] = useState("");
 
   useEffect(() => {
-    // Fetch the existing post data
+    
     const fetchPost = async () => {
       try {
         const res = await axios.get(`http://localhost:5000/api/posts/${id}`);
@@ -34,9 +34,9 @@ const EditPost = () => {
         title,
         content,
         author,
-        tags: tags.split(",").map((tag) => tag.trim()), // Convert to array
+        tags: tags.split(",").map((tag) => tag.trim()), 
       });
-      navigate("/"); // Redirect to the updated post
+      navigate("/");
     } catch (error) {
       console.error("Error updating post:", error);
     }

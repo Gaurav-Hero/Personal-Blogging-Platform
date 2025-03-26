@@ -45,7 +45,7 @@ export const updatePost = async (req, res) => {
     try {
       const updatedPost = await Post.findByIdAndUpdate(
         req.params.id,
-        { $set: req.body }, // Updates only the provided fields
+        { $set: req.body },
         { new: true }
       );
   

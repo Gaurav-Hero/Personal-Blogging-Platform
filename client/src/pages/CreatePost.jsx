@@ -6,7 +6,7 @@ const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [author, setAuthor] = useState("");
-  const [tags, setTags] = useState(""); // Will be stored as a comma-separated string
+  const [tags, setTags] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -16,9 +16,9 @@ const CreatePost = () => {
         title,
         content,
         author,
-        tags: tags.split(",").map((tag) => tag.trim()), // Convert to array
+        tags: tags.split(",").map((tag) => tag.trim()), 
       });
-      navigate("/"); // Redirect to home after successful post creation
+      navigate("/");
     } catch (error) {
       console.error("Error creating post:", error);
     }
